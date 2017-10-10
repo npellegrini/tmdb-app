@@ -1,0 +1,22 @@
+.fixed {
+    width: 120px;
+}
+
+.watchlist{
+    cursor: pointer;
+}
+
+.font-size{
+    font-size: unset;
+}
+
+.i-class{
+   
+    font-size: x-large;
+}
+
+.inline{
+    display: inline;
+    padding-left: 5px;
+}
+

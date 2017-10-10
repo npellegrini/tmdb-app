@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="input-group">
+        <input [(ngModel)]="searchString" (keyup)="searchMovie()" type="text"  class="form-control" placeholder="Busca por una pelicula...">
+        <div class="input-group-addon" ><i class="fa fa-search"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let movie of movies">
+    <img src="https://image.tmdb.org/t/p/w154{{movie.poster_path}}"  alt="No existe imagen" >
+    <h3 ><a routerLink='/movie/{{ movie.id }}' routerLinkActive="active"><strong>{{ movie.title}}</strong></a></h3>
+    <p><strong>Título Original: </strong> {{ movie.original_title }} </p>
+    <p><strong>Estreno: </strong> {{ movie.release_date }} </p>
+  </div>
+
+</div>

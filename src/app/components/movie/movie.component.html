@@ -1,0 +1,53 @@
+<div *ngIf="movie">
+  <div class="card-deck">
+    <div *ngIf="movie.poster_path" class="card col-md-3 col-lg-3 col-xl-3 border-0">
+      <a href="http://image.tmdb.org/t/p/original/{{ movie.poster_path }}" target="_blank">
+        <img class="img-fluid rounded float-center" src="http://image.tmdb.org/t/p/w185/{{ movie.poster_path }}" alt="Sin Imagen Disponible"
+        width="100%" height="100%">
+      </a>
+
+    </div>
+    <div class="card col-md-9 col-lg-9 col-xl-9 border-0">
+      <div class="card-block">
+        <h1 class="card-title">
+          <a href="https://www.themoviedb.org/movie/{{ movie.id }}" target="_blank"><strong>{{ movie.title }}</strong></a>
+        </h1>
+        <h5 class="card-subtitle mb-2 text-muted">{{ movie.original_title }}</h5>
+        <p class="card-text"><strong>Sinopsis:</strong> {{ movie.overview }}</p>
+        <p class="card-text"><strong>Director:</strong> {{ director }}</p>
+        <p class="card-text"><strong>Géneros:</strong> <span *ngFor="let genre of genres">{{ genre.name }}.&nbsp;</span></p>
+        <p class="card-text"><strong>Estreno:</strong> {{ movie.release_date | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="mt-5 text-center">
+    <h2><i class="fa fa-spinner fa-pulse fa-fw"></i>&nbsp;&nbsp;&nbsp;Cargando...</h2>
+  </div>
+
+  <div *ngIf="!isLoading" class="row mt-5">
+    <div class="col">
+      <h2><strong>Valoración General: </strong>{{ movie.vote_average | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true"
+          style="color: yellow;"></i></h2>
+    </div>
+    
+      <h2><strong>Mi Valoración:</strong> {{ userRating | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true" style="color: yellow;"></i></h2>
+
+    <form  class="form-inline">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-danger" [disabled]="minLimit || sendingUserRating" [ngClass]="btnMinusClass" (click)="onClickMinus()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+        <button type="button" class="btn btn-secondary fixed" [disabled]="sendingUserRating" (click)="onClickRate()">
+          <span>Valorar = {{ currentValue | number:'1.1-1' }}</span>
+        </button>
+        <button type="button" class="btn btn-success" [disabled]="maxLimit || sendingUserRating"  (click)="onClickPlus()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      </div>
+    </form>
+  </div>
+  <div class="mt-5" *ngIf="hasCrew">
+    <app-cast [cast]="cast"></app-cast>
+  </div>    
+
+
+
+
+</div>
