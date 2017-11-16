@@ -8,25 +8,31 @@
 
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" routerLink="/home">Inicio</a>
-        </li>          
+        </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" routerLink="/search">Buscar&nbsp;&nbsp;<i class="fa fa-search fa-flip-horizontal" aria-hidden="true"></i></a>
         </li>
       </ul>
     </div>
     <div>
-<!-- si no esta logiado -->
-      <form class="navbar-form navbar-right" >
+
+      <!-- si no esta logiado -->
+      <form *ngIf="!authenticationService.isLogged()" class="navbar-form navbar-right" >
         <div class="row">
-          <div class="input-group-btn">          
-            <input type="text" class="form-control" name="username" placeholder="Username">
-            <input type="text" class="form-control" name="password" placeholder="Password">
-            <button type="submit" class="btn btn-secondary">Sign In</button>
+          <div class="input-group-btn">
+            <button (click)="login()" type="submit" class="btn btn-secondary">Iniciar sesión</button>
           </div>
         </div>
       </form>
 
-<!-- si no esta logiado, muestra nombre y logout -->
+      <!-- si esta logiado, muestra nombre y logout -->
+      <form *ngIf="authenticationService.isLogged()" class="navbar-form navbar-right" >
+        <div class="row">
+          <div class="input-group-btn">
+            <button (click)="logout()" type="submit" class="btn btn-secondary">Cerrar sesión</button>
+          </div>
+        </div>
+      </form>
 
     </div>
   </div>
