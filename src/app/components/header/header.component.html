@@ -1,11 +1,10 @@
 <nav class="navbar navbar-expand-md static-top navbar-dark bg-dark">
   <div class="container">
-    <div>
-      <a class="navbar-brand" href="/src/index.html" title="Home"><img src="../assets/images/navbar-image.png"></a>
-    </div>
     <div class="collapse navbar-collapse" id="navbarItems">
       <ul class="navbar-nav mr-auto">
-
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home"><img src="../assets/images/navbar-image.png" width="45" height="40"></a>
+        </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" routerLink="/home">Inicio</a>
         </li>          
