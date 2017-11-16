@@ -6,9 +6,7 @@ import { MovieComponent } from './components/movie/movie.component';
 import { SearchComponent } from './components/search/search.component';
 import { AppComponent } from './app.component';
 //import { LoginComponent } from './components/login/login.component';
-// Guards
-import { AuthGuard } from './guards/auth.guards';
-import { NotAuthGuard } from './guards/notAuth.guards';
+
 
 
 const routes: Routes = [
@@ -19,7 +17,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
-  },  
+  },
   {
     path: 'search',
     component: SearchComponent
@@ -27,7 +25,7 @@ const routes: Routes = [
   {
     path: '**',
     component: HomeComponent
-  },  
+  },
   {
     path: '',
     component: AppComponent
