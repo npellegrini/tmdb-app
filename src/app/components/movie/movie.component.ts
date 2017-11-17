@@ -7,12 +7,10 @@ import { MovieService } from '../../services/movie.service';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { UserService } from '../../services/user.service';
 
-
 import { People } from '../../models/People';
 import { Movie } from '../../models/Movie';
 import { Gender } from '../../models/Gender';
 import { Review } from '../../models/Review';
-
 
 
 @Component({
@@ -34,7 +32,6 @@ export class MovieComponent implements OnInit {
   movieId;
   userRating;
   userHasVoted;
-  userWatchlist;
   volverPuntuar = false;
   isLoading = true;
   currentValue = 5;
@@ -56,11 +53,6 @@ export class MovieComponent implements OnInit {
     private router: Router
   ) { }
 
-  logInFromMovie() {
-    localStorage.setItem('redirectToMovie', '/movie/' + this.movieId);
-    this.router.navigate(['/identify']);
-  }
-
   onClickVolverPuntuar() {
     this.volverPuntuar = true;
     this.currentValue = this.userRating;
@@ -69,6 +61,7 @@ export class MovieComponent implements OnInit {
   onClickRate() {
     this.sendingUserRating = true;
 
+// rehacer
     this.userService.setMovieRating(this.movieId, this.currentValue)
       .subscribe(data => {
         // console.log(data);
@@ -106,36 +99,6 @@ export class MovieComponent implements OnInit {
     }
   }
 
-  onClickWatchlist() {
-    // console.log(this.currentValue);
-    this.sendingUserWatchlist = true;
-
-    this.userService.setMovieWatchlist(this.movieId, this.userWatchlist)
-      .subscribe(data => {
-        if (data.status_code === 12 || data.status_code === 1) {
-          setTimeout(() => {
-            alert('Agregaste la Película a tu Watchlist');
-            this.sendingUserWatchlist = false;
-            this.textWatchlist = 'Quitar de Watchlist';
-            this.iconWatchlist = 'fa fa-eye-slash';
-            this.btnWatchlist = 'btn btn-danger';
-            this.userWatchlist = true;
-          }, 1000);
-        } else if (data.status_code === 13) {
-          setTimeout(() => {
-            alert('Quitaste la Película a tu Watchlist');
-            this.userWatchlist = false;
-            this.textWatchlist = 'Agregar a Watchlist';
-            this.iconWatchlist = 'fa fa-eye';
-            this.btnWatchlist = 'btn btn-success';
-            this.sendingUserWatchlist = false;
-          }, 1000);
-        } else {
-          alert('Algo salió mal, vuelve a intentar');
-        }
-      });
-  }
-
   ngOnInit() {
 
     setTimeout(() => {
@@ -145,7 +108,6 @@ export class MovieComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.movieId = +params['id'];
     });
-
 
 
     this.route.params.map(params => params['id'])

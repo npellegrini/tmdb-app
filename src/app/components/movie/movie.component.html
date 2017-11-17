@@ -1,11 +1,12 @@
 <div class="pelicula" *ngIf="movie">
+
+  <!-- movie -->
   <div class="card-deck">
     <div *ngIf="movie.poster_path" class="card col-md-3 col-lg-3 col-xl-3 border-0">
       <a href="http://image.tmdb.org/t/p/original/{{ movie.poster_path }}" target="_blank">
         <img class="img-fluid rounded float-center" src="http://image.tmdb.org/t/p/w185/{{ movie.poster_path }}" alt="Sin Imagen Disponible"
         width="100%" height="100%">
       </a>
-
     </div>
     <div class="card col-md-9 col-lg-9 col-xl-9 border-0">
       <div class="card-block">
@@ -25,29 +26,39 @@
     <h2><i class="fa fa-spinner fa-pulse fa-fw"></i>&nbsp;&nbsp;&nbsp;Cargando...</h2>
   </div>
 
+  <!-- valoracion -->
   <div *ngIf="!isLoading" class="row mt-5">
+
     <div class="col">
       <h2><strong>Valoración General: </strong>{{ movie.vote_average | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true"
-          style="color: yellow;"></i></h2>
+        style="color: yellow;"></i></h2>
     </div>
-    
-      <h2><strong>Mi Valoración:</strong> {{ userRating | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true" style="color: yellow;"></i></h2>
 
-    <form  class="form-inline">
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-danger" [disabled]="minLimit || sendingUserRating" [ngClass]="btnMinusClass" (click)="onClickMinus()"><i class="fa fa-minus" aria-hidden="true"></i></button>
-        <button type="button" class="btn btn-secondary fixed" [disabled]="sendingUserRating" (click)="onClickRate()">
-          <span>Valorar = {{ currentValue | number:'1.1-1' }}</span>
-        </button>
-        <button type="button" class="btn btn-success" [disabled]="maxLimit || sendingUserRating"  (click)="onClickPlus()"><i class="fa fa-plus" aria-hidden="true"></i></button>
-      </div>
-    </form>
+    <div *ngIf="authService.isLogged()">
+
+        <h2><strong>Mi Valoración:</strong> {{ userRating | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true" style="color: yellow;"></i></h2>
+
+        <form  class="form-inline">
+          <div class="btn-group" role="group" >
+
+            <button type="button" class="btn btn-danger" [disabled]="minLimit || sendingUserRating" [ngClass]="btnMinusClass" (click)="onClickMinus()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+
+            <button type="button" class="btn btn-secondary fixed" [disabled]="sendingUserRating" (click)="onClickRate()">
+              <span>Valorar = {{ currentValue | number:'1.1-1' }}</span>
+            </button>
+
+            <button type="button" class="btn btn-success" [disabled]="maxLimit || sendingUserRating"  (click)="onClickPlus()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+          </div>
+        </form>
+
+    </div>
+
   </div>
-  <div class="mt-5" *ngIf="hasCrew">
-    <app-cast [cast]="cast"></app-cast>
-  </div>    
 
+    <!-- cast -->
+    <div class="mt-5" *ngIf="hasCrew">
+      <app-cast [cast]="cast"></app-cast>
+    </div>
 
-
-
-</div>
+  </div>
