@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md static-top navbar-dark bg-dark">
   <div class="container">
     <div>
-      <a class="navbar-brand" href="/src/index.html" title="Home"><img src="../assets/images/navbar-image.png"></a>
+      <a class="nav-link" routerLink="/home"><img src="../assets/images/navbar-image.png" width="45" height="40"></a>
     </div>
     <div class="collapse navbar-collapse" id="navbarItems">
       <ul class="navbar-nav mr-auto">
@@ -15,19 +15,18 @@
       </ul>
     </div>
     <div>
-
       <ul class="navbar-nav">
-          
           <li *ngIf="!sesionIniciada" class="nav-item" >
-              <a class="nav-link" (click)="onClickLogIn()">Iniciar sesión</a>
+              <button [ngClass]="buttonClass" class="btn btn-primary mb-3" (click)="onClickLogIn()">
+                  Iniciar sesión
+              </button>
             </li>
-            
             <li *ngIf="sesionIniciada" class="nav-item">
-              <a class="nav-link" routerLink="/home" (click)="onClickLogOut()">Cerrar sesión</a>
+              <button [ngClass]="buttonClass" class="btn btn-primary " (click)="onClickLogOut()">
+                  Cerrar sesión
+              </button>
             </li>
-
         </ul>
-
     </div>
   </div>
 </nav>

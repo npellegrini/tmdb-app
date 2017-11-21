@@ -47,6 +47,7 @@ export class MovieComponent implements OnInit {
   sendingUserRating = false;
   btnWatchlist;
   iconWatchlist;
+  sesionIniciada : boolean;
 
   constructor(
     private movieService: MovieService,
@@ -146,8 +147,6 @@ export class MovieComponent implements OnInit {
       this.movieId = +params['id'];
     });
 
-
-
     this.route.params.map(params => params['id'])
       .subscribe((id) => {
         this.movieService.getMovieById(id)
@@ -184,6 +183,13 @@ export class MovieComponent implements OnInit {
       });
 
     localStorage.removeItem('redirectToMovie');
+
+    if (localStorage.getItem('session_started') === 'yes' ) {
+      return this.sesionIniciada = true;
+    }
+    else{
+      return this.sesionIniciada = false;
+    };
   }
 
 }
