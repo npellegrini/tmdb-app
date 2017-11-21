@@ -45,7 +45,7 @@ export class MovieComponent implements OnInit {
   sendingUserRating = false;
   btnWatchlist;
   iconWatchlist;
-  sesionIniciada : boolean;
+  sessionBegin  : boolean;
 
   constructor(
     private movieService: MovieService,
@@ -54,11 +54,6 @@ export class MovieComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) { }
-
-  logInFromMovie() {
-    localStorage.setItem('redirectToMovie', '/movie/' + this.movieId);
-    this.router.navigate(['/identify']);
-  }
 
   onClickVolverPuntuar() {
     this.volverPuntuar = true;
@@ -121,7 +116,6 @@ export class MovieComponent implements OnInit {
           .subscribe(data => {
             this.movie = data;
             this.genders = this.movie.genders;
-            // console.log(this.movie);
           }, (err: any) => {
             if (err.status === 404) {
               alert('No existe Película con ese ID');
@@ -134,7 +128,6 @@ export class MovieComponent implements OnInit {
             if (data.total_results > 0) {
               this.hasReviews = true;
               this.reviews = data.results;
-            console.log(this.reviews);
             }
           });
 
@@ -142,21 +135,19 @@ export class MovieComponent implements OnInit {
           .subscribe(data => {
             if (data) {
               this.hasCrew = true;
-              // console.log(data);
               this.director = data.crew.find(p => p.job === 'Director').name;
               this.cast = data.cast;
-
             }
           });
       });
 
-    localStorage.removeItem('redirectToMovie');
+    localStorage.setItem('redirectToMovie','/movie/'+this.movieId);
 
     if (localStorage.getItem('session_started') === 'yes' ) {
-      return this.sesionIniciada = true;
+      return this.sessionBegin  = true;
     }
     else{
-      return this.sesionIniciada = false;
+      return this.sessionBegin  = false;
     };
   }
 

@@ -25,16 +25,14 @@ export class AuthenticateService {
   getRequestToken() {
     this.tokenUrl = this.domain + this.typeToken + this.apiKey;
     return this.http.get(this.tokenUrl)
-      .map(res => res.json());
+    .map(res => res.json());
   }
 
   // https://www.themoviedb.org/authenticate/{REQUEST_TOKEN}?redirect_to=http://www.yourapp.com/approved
-  goToLogIn(request_token: string) {
-    let redirectTo;
-    if (this.appPort === '4200') {
-      redirectTo = '?redirect_to=' + this.appProtocol + '//' + this.appDomain + ':' + this.appPort + '/login';
-    } else {
-      redirectTo = '?redirect_to=' + this.appProtocol + '//' + this.appDomain + '/ng4-themoviedb/login';
+  logIn(request_token: string) {
+    let redirectTo='?redirect_to='+this.appProtocol + '//' + this.appDomain + ':' + this.appPort;
+    if(localStorage.getItem('redirectToMovie')){
+      redirectTo+=localStorage.getItem('redirectToMovie');
     }
     window.location.href = this.authenticateDomain + request_token + redirectTo;
   }
@@ -43,7 +41,7 @@ export class AuthenticateService {
   getSessionId(request_token: string) {
     this.sessionUrl = this.domain + this.typeSessionId + this.apiKey + '&request_token=' + request_token;
     return this.http.get(this.sessionUrl)
-      .map(res => res.json());
+    .map(res => res.json());
   }
 
   storeRequestToken(request_token: string) {

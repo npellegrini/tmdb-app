@@ -8,7 +8,7 @@
 
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" routerLink="/home">Inicio</a>
-        </li>          
+        </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" routerLink="/search">Buscar&nbsp;&nbsp;<i class="fa fa-search fa-flip-horizontal" aria-hidden="true"></i></a>
         </li>
@@ -16,12 +16,12 @@
     </div>
     <div>
       <ul class="navbar-nav">
-          <li *ngIf="!sesionIniciada" class="nav-item" >
+          <li *ngIf="!sessionBegin " class="nav-item" >
               <button [ngClass]="buttonClass" class="btn btn-primary mb-3" (click)="onClickLogIn()">
                   Iniciar sesión
               </button>
             </li>
-            <li *ngIf="sesionIniciada" class="nav-item">
+            <li *ngIf="sessionBegin " class="nav-item">
               <button [ngClass]="buttonClass" class="btn btn-primary " (click)="onClickLogOut()">
                   Cerrar sesión
               </button>

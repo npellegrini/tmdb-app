@@ -2,16 +2,12 @@
     width: 120px;
 }
 
-.watchlist{
-    cursor: pointer;
-}
-
 .font-size{
     font-size: unset;
 }
 
 .i-class{
-   
+
     font-size: x-large;
 }
 
@@ -23,7 +19,7 @@
 .card{
     background-color:gainsboro;
     font-weight: bold;
-    font-size: medium;     
+    font-size: medium;
 }
 
 .pelicula{

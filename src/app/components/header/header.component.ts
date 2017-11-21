@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { ResourceLoader } from '@angular/compiler';
 import { SimpleChanges } from '@angular/core';
@@ -18,8 +18,7 @@ export class HeaderComponent implements OnInit {
 
   request_token = localStorage.getItem('request_token');
   session_id;
-  isApproved;
-  sesionIniciada : boolean;
+  sessionBegin : boolean;
   buttonClass;
 
   constructor(
@@ -36,7 +35,7 @@ export class HeaderComponent implements OnInit {
     this.buttonClass = 'disabled';
 
     setTimeout(() => {
-      this.authenticateService.goToLogIn(this.request_token);
+      this.authenticateService.logIn(this.request_token);
     }, 2000);
   }
 
@@ -48,6 +47,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    this.route.params.subscribe((params: Params) => {
+        let userId = params['userId'];
+        console.log(userId);
+      });
+
     this.authenticateService.getSessionId(this.request_token)
     .subscribe(data => {
       this.session_id = data.session_id;
@@ -56,12 +60,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngDoCheck() {
-    
+
       if (localStorage.getItem('session_started') === 'yes' ) {
-        return this.sesionIniciada = true;
+        return this.sessionBegin = true;
       }
       else{
-        return this.sesionIniciada = false;
+        return this.sessionBegin = false;
       }
   }
 }
