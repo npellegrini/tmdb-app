@@ -15,7 +15,6 @@
         <h5 class="card-subtitle mb-2 text-muted">{{ movie.original_title }}</h5>
         <p class="card-text"><strong>Sinopsis:</strong> {{ movie.overview }}</p>
         <p class="card-text"><strong>Director:</strong> {{ director }}</p>
-        <p class="card-text"><strong>Géneros:</strong> <span *ngFor="let genre of genres">{{ genre.name }}.&nbsp;</span></p>
         <p class="card-text"><strong>Estreno:</strong> {{ movie.release_date | date:'dd/MM/yyyy' }}</p>
       </div>
     </div>

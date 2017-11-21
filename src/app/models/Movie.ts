@@ -1,4 +1,3 @@
-import { Gender } from './Gender';
 import { People } from './People';
 
 export class Movie {
@@ -10,6 +9,5 @@ export class Movie {
     release_date: string;
     vote_average: number;
     rating?: number;
-    genders: Gender[];
     cast: People[];
 }

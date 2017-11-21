@@ -24,9 +24,6 @@ import { RouterModule }   from '@angular/router';
 import { AuthenticateService } from './services/authenticate.service';
 import { UserService } from './services/user.service';
 
-// Guards
-import { AuthGuard } from './guards/auth.guards';
-import { NotAuthGuard } from './guards/notAuth.guards';
 
 @NgModule({
   declarations: [
@@ -34,7 +31,7 @@ import { NotAuthGuard } from './guards/notAuth.guards';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    MovieComponent,  
+    MovieComponent,
     CastComponent,
     SearchComponent
   ],
@@ -47,9 +44,8 @@ import { NotAuthGuard } from './guards/notAuth.guards';
   ],
   providers: [MovieService,
                 AuthenticateService,
-                UserService,
-                AuthGuard,
-                NotAuthGuard,],
+                UserService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
