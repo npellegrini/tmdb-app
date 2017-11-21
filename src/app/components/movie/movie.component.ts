@@ -9,7 +9,6 @@ import { UserService } from '../../services/user.service';
 
 import { People } from '../../models/People';
 import { Movie } from '../../models/Movie';
-import { Gender } from '../../models/Gender';
 import { Review } from '../../models/Review';
 
 
@@ -24,7 +23,6 @@ export class MovieComponent implements OnInit {
 
   id: string;
   movie: Movie;
-  genders: Gender[];
   reviews: Review[];
   cast: People[];
   hasReviews = false;
@@ -115,7 +113,6 @@ export class MovieComponent implements OnInit {
         this.movieService.getMovieById(id)
           .subscribe(data => {
             this.movie = data;
-            this.genders = this.movie.genders;
           }, (err: any) => {
             if (err.status === 404) {
               alert('No existe Película con ese ID');
