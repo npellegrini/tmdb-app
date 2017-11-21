@@ -59,4 +59,15 @@
     <app-cast [cast]="cast"></app-cast>
   </div>
 
+  <div class="mt-5" *ngIf="hasReviews">
+    <h2><strong>Reviews:</strong></h2>
+
+    <div *ngFor="let review of reviews" class="mt-4">
+      <div class="blockquote mb-5">
+        <div class="mb-0">{{ review.content }}</div>
+        <footer class="blockquote-footer">Escrita por <cite title="Source Title"><strong>{{ review.author }}</strong></cite></footer>
+        </div>
+    </div>
+  </div>
+
 </div>

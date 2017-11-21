@@ -125,6 +125,7 @@ export class MovieComponent implements OnInit {
             if (data.total_results > 0) {
               this.hasReviews = true;
               this.reviews = data.results;
+              console.log(this.reviews);
             }
           });
 

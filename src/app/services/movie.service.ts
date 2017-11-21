@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class MovieService {
 
-  private api_key = 'api_key=5a1e00313c18a1e00d243cfeb412c79d';
+  private api_key = 'api_key=cdc281a84b6d81063de227ae23cf539c';
   private page='&page=1'
-  private lenguage='&language=es'
+  private language='&language=en-US'
   private search_movie='search/movie?';
   private movie='movie/';
   private api_url='https://api.themoviedb.org/3/';
@@ -27,14 +27,14 @@ export class MovieService {
   }
 
    searchMovie(queryString){
-    var request=this.api_url+this.search_movie+this.api_key+this.lenguage+this.query+queryString+this.page+this.adult;
+    var request=this.api_url+this.search_movie+this.api_key+this.language+this.query+queryString+this.page+this.adult;
 
     return this.http.get(request)
     .map( res => res.json())
   }
 
   getReviewsByMovieId(id: string){
-    var request=this.api_url+this.movie+id+this.reviews+this.api_key+this.lenguage;
+    var request=this.api_url+this.movie+id+this.reviews+this.api_key+this.language;
 
     return this.http.get(request)
     .map(res => res.json())
@@ -43,7 +43,7 @@ export class MovieService {
 
 // https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
   getMovieById(id: string){
-    var request= this.api_url+this.movie+id+'?'+this.api_key+this.lenguage;
+    var request= this.api_url+this.movie+id+'?'+this.api_key+this.language;
 
     return this.http.get(request)
     .map(res => res.json())
