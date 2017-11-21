@@ -31,9 +31,14 @@
           style="color: yellow;"></i></h2>
     </div>
     
+    <div *ngIf="!sesionIniciada">
+      <h1>El tipo no esta logueado</h1>
+    </div>
+    
+    <div *ngIf="sesionIniciada">
       <h2><strong>Mi Valoración:</strong> {{ userRating | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true" style="color: yellow;"></i></h2>
 
-    <form  class="form-inline">
+    <form class="form-inline">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-danger" [disabled]="minLimit || sendingUserRating" [ngClass]="btnMinusClass" (click)="onClickMinus()"><i class="fa fa-minus" aria-hidden="true"></i></button>
         <button type="button" class="btn btn-secondary fixed" [disabled]="sendingUserRating" (click)="onClickRate()">
@@ -43,11 +48,9 @@
       </div>
     </form>
   </div>
+  </div>
   <div class="mt-5" *ngIf="hasCrew">
     <app-cast [cast]="cast"></app-cast>
   </div>    
-
-
-
 
 </div>

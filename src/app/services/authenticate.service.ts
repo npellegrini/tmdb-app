@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 export class AuthenticateService {
 
   domain = 'https://api.themoviedb.org/3';
-  apiKey = 'api_key=a1f9c26ac26edcec7f8c8237a061f2d7';
+  apiKey = 'api_key=cdc281a84b6d81063de227ae23cf539c';
   typeToken = '/authentication/token/new?';
   typeSessionId = '/authentication/session/new?';
   authenticateDomain = 'https://www.themoviedb.org/authenticate/';

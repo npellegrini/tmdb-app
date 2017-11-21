@@ -15,18 +15,18 @@
       </ul>
     </div>
     <div>
-<!-- si no esta logiado -->
-      <form class="navbar-form navbar-right" >
-        <div class="row">
-          <div class="input-group-btn">          
-            <input type="text" class="form-control" name="username" placeholder="Username">
-            <input type="text" class="form-control" name="password" placeholder="Password">
-            <button type="submit" class="btn btn-secondary">Sign In</button>
-          </div>
-        </div>
-      </form>
 
-<!-- si no esta logiado, muestra nombre y logout -->
+      <ul class="navbar-nav">
+          
+          <li *ngIf="!sesionIniciada" class="nav-item" >
+              <a class="nav-link" (click)="onClickLogIn()">Iniciar sesión</a>
+            </li>
+            
+            <li *ngIf="sesionIniciada" class="nav-item">
+              <a class="nav-link" routerLink="/home" (click)="onClickLogOut()">Cerrar sesión</a>
+            </li>
+
+        </ul>
 
     </div>
   </div>
