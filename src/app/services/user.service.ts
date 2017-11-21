@@ -13,7 +13,7 @@ export class UserService {
   typeWatchlistMovies = '/account/{account_id}/watchlist/movies?';
   typeVotedTvShows = '/account/{account_id}/rated/tv?';
   typeWatchlistTvShows = '/account/{account_id}/watchlist/tv?';
-  apiKey = 'api_key=a1f9c26ac26edcec7f8c8237a061f2d7';
+  apiKey = 'api_key=cdc281a84b6d81063de227ae23cf539c';
   sessionId = '&session_id=' + localStorage.getItem('session_id');
 
   private userProfileUrl;
@@ -74,6 +74,7 @@ export class UserService {
     return this.http.request(new Request(requestOptions))
       .map(res => res.json());
   }
+  
 
   // https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=<<>>&session_id=<<>>
   setMovieWatchlist(movieId: number, watchlist: boolean) {

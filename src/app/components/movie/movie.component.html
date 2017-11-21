@@ -21,6 +21,7 @@
     </div>
   </div>
 
+  <!--SECTOR DE VALORACION-->
   <div *ngIf="isLoading" class="mt-5 text-center">
     <h2><i class="fa fa-spinner fa-pulse fa-fw"></i>&nbsp;&nbsp;&nbsp;Cargando...</h2>
   </div>
@@ -30,25 +31,31 @@
       <h2><strong>Valoración General: </strong>{{ movie.vote_average | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true"
           style="color: yellow;"></i></h2>
     </div>
-    
-    <div *ngIf="!sesionIniciada">
-      <h1>El tipo no esta logueado</h1>
+    <div *ngIf="authService.isLoggedIn() && userHasVoted" class="col">
+      <h2><strong>Mi voto:</strong> {{ userRating | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true" style="color: yellow;"></i></h2>
     </div>
-    
-    <div *ngIf="sesionIniciada">
-      <h2><strong>Mi Valoración:</strong> {{ userRating | number:'1.1-1' }}&nbsp;<i class="fa fa-star" aria-hidden="true" style="color: yellow;"></i></h2>
-
-    <form class="form-inline">
+    <div *ngIf="authService.isLoggedIn() && !userHasVoted" class="col">
+      <h2><strong>Todavía no puntuaste.</strong></h2>
+    </div>
+    <div *ngIf="!authService.isLoggedIn()" class="col">
+      <form class="form-inline">
+        <label class="h2">Para puntuar tenés que iniciar sesión&nbsp;&nbsp;&nbsp;</label>
+      </form>
+    </div>
+    <button *ngIf="authService.isLoggedIn() && userHasVoted && !volverPuntuar" type="button" class="btn btn-primary" (click)="onClickVolverPuntuar()">Cambiar mi puntaje</button>
+    <form *ngIf="(authService.isLoggedIn() && !userHasVoted) || (authService.isLoggedIn() && volverPuntuar)" class="form-inline">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-danger" [disabled]="minLimit || sendingUserRating" [ngClass]="btnMinusClass" (click)="onClickMinus()"><i class="fa fa-minus" aria-hidden="true"></i></button>
         <button type="button" class="btn btn-secondary fixed" [disabled]="sendingUserRating" (click)="onClickRate()">
-          <span>Valorar = {{ currentValue | number:'1.1-1' }}</span>
+          <span *ngIf="!sendingUserRating">Votar = {{ currentValue | number:'1.1-1' }}</span>
+          <span *ngIf="sendingUserRating"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>
         </button>
-        <button type="button" class="btn btn-success" [disabled]="maxLimit || sendingUserRating"  (click)="onClickPlus()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        <button type="button" class="btn btn-success" [disabled]="maxLimit || sendingUserRating" [ngClass]="btnPlusClass" (click)="onClickPlus()"><i class="fa fa-plus" aria-hidden="true"></i></button>
       </div>
     </form>
   </div>
-  </div>
+  <!--FIN SECTOR DE VALORACION-->
+
   <div class="mt-5" *ngIf="hasCrew">
     <app-cast [cast]="cast"></app-cast>
   </div>    

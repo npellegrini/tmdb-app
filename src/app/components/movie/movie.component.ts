@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-//import { RouterModule }   from '@angular/router';
 import { CastComponent } from '../cast/cast.component';
 
 import { MovieService } from '../../services/movie.service';
@@ -34,7 +33,6 @@ export class MovieComponent implements OnInit {
   movieId;
   userRating;
   userHasVoted;
-  userWatchlist;
   volverPuntuar = false;
   isLoading = true;
   currentValue = 5;
@@ -72,7 +70,7 @@ export class MovieComponent implements OnInit {
 
     this.userService.setMovieRating(this.movieId, this.currentValue)
       .subscribe(data => {
-        // console.log(data);
+        console.log(data);
         if (data.status_code === 12 || data.status_code === 1) {
           setTimeout(() => {
             alert('Valoraste la película con un ' + this.currentValue);
@@ -105,36 +103,6 @@ export class MovieComponent implements OnInit {
       this.btnMinusClass = 'disabled';
       this.minLimit = true;
     }
-  }
-
-  onClickWatchlist() {
-    // console.log(this.currentValue);
-    this.sendingUserWatchlist = true;
-
-    this.userService.setMovieWatchlist(this.movieId, this.userWatchlist)
-      .subscribe(data => {
-        if (data.status_code === 12 || data.status_code === 1) {
-          setTimeout(() => {
-            alert('Agregaste la Película a tu Watchlist');
-            this.sendingUserWatchlist = false;
-            this.textWatchlist = 'Quitar de Watchlist';
-            this.iconWatchlist = 'fa fa-eye-slash';
-            this.btnWatchlist = 'btn btn-danger';
-            this.userWatchlist = true;
-          }, 1000);
-        } else if (data.status_code === 13) {
-          setTimeout(() => {
-            alert('Quitaste la Película a tu Watchlist');
-            this.userWatchlist = false;
-            this.textWatchlist = 'Agregar a Watchlist';
-            this.iconWatchlist = 'fa fa-eye';
-            this.btnWatchlist = 'btn btn-success';
-            this.sendingUserWatchlist = false;
-          }, 1000);
-        } else {
-          alert('Algo salió mal, vuelve a intentar');
-        }
-      });
   }
 
   ngOnInit() {
